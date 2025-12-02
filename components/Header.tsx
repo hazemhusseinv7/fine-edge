@@ -1,0 +1,79 @@
+"use client";
+
+import React from "react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Link,
+  Button,
+} from "@heroui/react";
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const items = [
+    { name: "Products", link: "#" },
+    { name: "About Us", link: "#" },
+    { name: "Blog", link: "#" },
+  ];
+
+  return (
+    <header>
+      <Navbar
+        onMenuOpenChange={setIsMenuOpen}
+        isBordered
+        className="fixed top-0"
+      >
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+          <NavbarBrand>
+            <Link href="/" className="font-bold text-teal-700">
+              Fine Edge
+            </Link>
+          </NavbarBrand>
+        </NavbarContent>
+
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          {items.map(({ name, link }, i) => (
+            <NavbarItem key={i}>
+              <Link className="text-teal-800 text-md font-medium" href={link}>
+                {name}
+              </Link>
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Button
+              as={Link}
+              className="text-teal-700 text-md font-medium"
+              href="#"
+              variant="faded"
+            >
+              Contact Us
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+        <NavbarMenu>
+          {items.map(({ name, link }, index) => (
+            <NavbarMenuItem key={`${name}-${index}`}>
+              <Link className="w-full" color="foreground" href={link} size="lg">
+                {name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
+      </Navbar>
+    </header>
+  );
+};
+
+export default Header;
