@@ -13,6 +13,10 @@
     "button": "تواصل معنا"
   },
 
+  "Testimonials": {
+    "title": "آراء العملاء"
+  },
+
   "Footer": {
     "links": {
       "link-1": "الخدمات",

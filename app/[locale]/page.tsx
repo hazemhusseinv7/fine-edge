@@ -7,8 +7,13 @@ import Hero from "@/components/Hero";
 import AboutUs from "@/components/AboutUs";
 import RiskAdvantageCards from "@/components/RiskAdvantageCards";
 import Clients from "@/components/Clients";
+import Testimonials from "@/components/Testimonials";
 
-import { getSettingsData, getAboutUsData } from "@/lib/sanity/queries";
+import {
+  getSettingsData,
+  getAboutUsData,
+  getTestimonialsData,
+} from "@/lib/sanity/queries";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -16,9 +21,10 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   // Enable static rendering
   setRequestLocale(locale as Locale);
 
-  const [settings, aboutUs] = await Promise.all([
+  const [settings, aboutUs, testimonials] = await Promise.all([
     getSettingsData(),
     getAboutUsData(locale),
+    getTestimonialsData(locale),
   ]);
 
   return (
@@ -26,6 +32,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <Hero />
       <RiskAdvantageCards />
       <AboutUs settings={settings} aboutUs={aboutUs} />
+      <Testimonials testimonials={testimonials} />
       <Clients />
     </ReactLenis>
   );

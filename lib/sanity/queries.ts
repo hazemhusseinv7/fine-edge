@@ -162,6 +162,30 @@ export async function getAboutUsData(
   }
 }
 
+export async function getTestimonialsData(
+  lang: string = "en"
+): Promise<TestimonialsType | null> {
+  const query = `*[_type == "testimonials"][0]{
+    "testimonials": testimonials[] {
+      "name": name[_key == $lang][0].value,
+      "content": content[_key == $lang][0].value
+    }
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { lang },
+      {
+        next: { revalidate: REVALIDATE_TIME, tags: ["testimonials"] },
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching testimonials data:", error);
+    return null;
+  }
+}
+
 export async function getClientsData(): Promise<ClientsType | null> {
   const query = `*[_type == "clients"][0]{
     logos[] {

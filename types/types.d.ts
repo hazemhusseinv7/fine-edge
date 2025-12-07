@@ -72,6 +72,13 @@ interface AboutUsType {
   };
 }
 
+interface TestimonialsType {
+  testimonials: {
+    name: string;
+    content: string;
+  }[];
+}
+
 interface ClientsType {
   logos: ImageType[];
 }

@@ -26,6 +26,10 @@ declare const messages: {
 
     "copyright": "All rights reserved."
   },
+  
+  "Testimonials": {
+    "title": "Testimonials"
+  },
 
   "Contact": {
     "title": "Contact Us",
@@ -49,7 +53,7 @@ declare const messages: {
       }
     }
   },
-  
+
   "Blog": {
     "title": "Blog",
     "read-more": "Read more",
