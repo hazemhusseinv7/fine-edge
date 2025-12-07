@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Locale, hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Providers } from "./providers";
 
 import Header from "@/components/Header";
-import { Providers } from "./providers";
+import Footer from "@/components/Footer";
 
 const tajawal = Tajawal({
   variable: "--font-tajawal",
@@ -57,6 +58,7 @@ export default async function RootLayout({
           <Providers>
             <Header />
             {children}
+            <Footer />
           </Providers>
         </NextIntlClientProvider>
       </body>

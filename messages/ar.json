@@ -2,5 +2,16 @@
   "Metadata": {
     "title": "Fine Edge",
     "description": "Fine Edge"
+  },
+
+  "Footer": {
+    "links": {
+      "link-1": "الخدمات",
+      "link-2": "من نحن",
+      "link-3": "المدونة",
+      "link-4": "تواصل معنا"
+    },
+
+    "copyright": "جميع الحقوق محفوظة."
   }
 }

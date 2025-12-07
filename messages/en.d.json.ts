@@ -5,6 +5,17 @@ declare const messages: {
   "Metadata": {
     "title": "Fine Edge",
     "description": "Fine Edge"
+  },
+
+  "Footer": {
+    "links": {
+      "link-1": "Services",
+      "link-2": "About us",
+      "link-3": "Blog",
+      "link-4": "Contact us"
+    },
+
+    "copyright": "All rights reserved."
   }
 };
 export default messages;
