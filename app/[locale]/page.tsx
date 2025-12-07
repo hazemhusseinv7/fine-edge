@@ -6,6 +6,7 @@ import ReactLenis from "lenis/react";
 import Hero from "@/components/Hero";
 import AboutUs from "@/components/AboutUs";
 import RiskAdvantageCards from "@/components/RiskAdvantageCards";
+import { getSettingsData, getAboutUsData } from "@/lib/sanity/queries";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -13,11 +14,16 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   // Enable static rendering
   setRequestLocale(locale as Locale);
 
+  const [settings, aboutUs] = await Promise.all([
+    getSettingsData(),
+    getAboutUsData(locale),
+  ]);
+
   return (
     <ReactLenis root className="min-h-[200vh] overflow-hidden">
       <Hero />
       <RiskAdvantageCards />
-      <AboutUs />
+      <AboutUs settings={settings} aboutUs={aboutUs} />
     </ReactLenis>
   );
 }

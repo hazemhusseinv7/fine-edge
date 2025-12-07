@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import VerticalCutReveal from "@/components/ui/vertical-cut-reveal";
@@ -11,10 +12,43 @@ import {
   FaTiktok,
   FaSnapchat,
   FaLinkedin,
+  FaFacebook,
+  FaYoutube,
 } from "react-icons/fa6";
 import { RiWhatsappLine } from "react-icons/ri";
+import { urlFor } from "@/lib/sanity/image";
+import { PortableText } from "@portabletext/react";
 
-const AboutUs = () => {
+const portableTextComponents = {
+  types: {
+    image: ({ value }: any) => {
+      return (
+        <div className="my-8">
+          <Image
+            src={urlFor(value).width(800).height(600).url()}
+            alt={value.alt || "Blog image"}
+            width={800}
+            height={600}
+            className="rounded-lg mx-auto"
+          />
+          {value.caption && (
+            <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+              {value.caption}
+            </p>
+          )}
+        </div>
+      );
+    },
+  },
+};
+
+const AboutUs = ({
+  settings,
+  aboutUs,
+}: {
+  settings: SettingsType | null;
+  aboutUs: AboutUsType | null;
+}) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const revealVariants = {
     visible: (i: number) => ({
@@ -50,40 +84,50 @@ const AboutUs = () => {
   const socialMedia = [
     {
       name: "LinkedIn",
-      link: process.env.NEXT_PUBLIC_LINKEDIN,
+      link: settings?.linkedin,
       icon: FaLinkedin,
     },
     {
       name: "Twitter",
-      link: process.env.NEXT_PUBLIC_TWITTER,
+      link: settings?.twitter,
       icon: FaXTwitter,
     },
     {
-      name: "Tiktok",
-      link: process.env.NEXT_PUBLIC_TIKTOK,
+      name: "TikTok",
+      link: settings?.tiktok,
       icon: FaTiktok,
     },
     {
       name: "Instagram",
-      link: process.env.NEXT_PUBLIC_INSTAGRAM,
+      link: settings?.instagram,
       icon: FaInstagram,
     },
     {
       name: "Snapchat",
-      link: process.env.NEXT_PUBLIC_SNAPCHAT,
+      link: settings?.snapchat,
       icon: FaSnapchat,
     },
     {
-      name: "Whatsapp",
-      link: process.env.NEXT_PUBLIC_WHATSAPP,
+      name: "WhatsApp",
+      link: settings?.whatsapp,
       icon: RiWhatsappLine,
+    },
+    {
+      name: "Facebook",
+      link: settings?.facebook,
+      icon: FaFacebook,
+    },
+    {
+      name: "YouTube",
+      link: settings?.youtube,
+      icon: FaYoutube,
     },
   ].filter((item) => item.link);
 
   return (
     <section
       id="about-us"
-      className="bg-linear-to-t from-muted-foreground/5 relative"
+      className="bg-linear-to-t from-emerald-50 relative mt-20"
       ref={heroRef}
     >
       <div className="relative z-10 max-w-6xl mx-auto px-8 pt-20 pb-32">
@@ -98,7 +142,7 @@ const AboutUs = () => {
                 customVariants={revealVariants}
                 className="text-sm lg:text-2xl font-medium text-gray-600 dark:text-gray-300"
               >
-                About Us
+                {aboutUs?.title}
               </TimelineContent>
             </div>
             <div className="flex gap-4">
@@ -113,7 +157,7 @@ const AboutUs = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="md:size-8 size-6 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 hover:bg-teal-500 transition-colors duration-300 rounded-lg flex items-center justify-center cursor-pointer"
+                  className="md:size-8 size-6 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 hover:bg-emerald-500 transition-colors duration-300 rounded-lg flex items-center justify-center cursor-pointer"
                 >
                   <Icon className="max-sm:size-3" />
                 </TimelineContent>
@@ -147,7 +191,7 @@ const AboutUs = () => {
                 preserveAspectRatio="xMidYMid slice"
                 width="100%"
                 height="100%"
-                href="/about-us/about-us.jpg"
+                href={urlFor(aboutUs?.heroImage).url()}
               />
             </svg>
           </TimelineContent>
@@ -162,16 +206,20 @@ const AboutUs = () => {
               className="flex gap-4"
             >
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-teal-700 font-bold">20+</span>
+                <span className="text-emerald-700 font-bold">
+                  {aboutUs?.leftTopStat.value}
+                </span>
                 <span className="text-gray-600 dark:text-gray-300">
-                  Years of Experience
+                  {aboutUs?.leftTopStat.label}
                 </span>
                 <span className="text-gray-300">|</span>
               </div>
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-teal-700 font-bold">304 & 316</span>
+                <span className="text-emerald-700 font-bold">
+                  {aboutUs?.leftBottomStat.value}
+                </span>
                 <span className="text-gray-600 dark:text-gray-300">
-                  Premium Materials
+                  {aboutUs?.leftBottomStat.label}
                 </span>
               </div>
             </TimelineContent>
@@ -183,11 +231,13 @@ const AboutUs = () => {
                 customVariants={revealVariants}
                 className="flex sm:text-3xl text-2xl items-center gap-2 mb-2"
               >
-                <p className="text-teal-700 font-semibold">
-                  Dedicated
+                <p className="text-emerald-700 font-semibold">
+                  {aboutUs?.rightTopStat.value}
                   {/* <span className="text-gray-600 dark:text-gray-300 font-normal"></span> */}
                 </p>
-                <span className="text-gray-600 uppercase">Team</span>
+                <span className="text-gray-600 uppercase">
+                  {aboutUs?.rightTopStat.label}
+                </span>
               </TimelineContent>
               <TimelineContent
                 as="div"
@@ -196,10 +246,12 @@ const AboutUs = () => {
                 customVariants={revealVariants}
                 className="flex items-center gap-2 mb-2 sm:text-base text-xs"
               >
-                <span className="text-teal-700 dark:text-gray-300 font-bold text-xl lg:text-2xl">
-                  Global
+                <span className="text-emerald-700 dark:text-gray-300 font-bold text-xl lg:text-2xl">
+                  {aboutUs?.rightBottomStat.value}
                 </span>
-                <p className="text-gray-600">Technologies</p>
+                <p className="text-gray-600">
+                  {aboutUs?.rightBottomStat.label}
+                </p>
                 <span className="text-gray-300 lg:hidden block">|</span>
               </TimelineContent>
             </div>
@@ -213,9 +265,9 @@ const AboutUs = () => {
               animationNum={8}
               timelineRef={heroRef}
               customVariants={revealVariants}
-              className="text-4xl md:text-5xl leading-[110%]! font-semibold text-teal-800 mb-8"
+              className="text-4xl md:text-5xl leading-[110%]! font-semibold text-emerald-800 mb-8"
             >
-              Who We Are?
+              {aboutUs?.heading}
             </TimelineContent>
             <p className="sm:text-3xl md:text-4xl text-xl leading-[170%]! font-semibold text-gray-900 dark:text-gray-300 mb-8 max-w-3xl">
               <VerticalCutReveal
@@ -230,8 +282,7 @@ const AboutUs = () => {
                   delay: 3,
                 }}
               >
-                Two Decades of Integrated Stainless Steel Manufacturing
-                Solutions
+                {aboutUs?.subheading}
               </VerticalCutReveal>
             </p>
 
@@ -247,32 +298,12 @@ const AboutUs = () => {
                 animationNum={10}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="sm:text-base text-xs space-y-4"
+                className="space-y-4"
               >
-                <p className="leading-relaxed text-justify">
-                  At Fine Edge, we have over two decades of experience in the
-                  engineering industries, providing integrated solutions for
-                  manufacturing stainless steel products. We adhere to the
-                  highest standards of quality and safety by utilizing the
-                  latest global technologies and premium raw materials—304 (AISI
-                  18/10) and 316 (AISI 18/10/2).
-                </p>
-                <p className="leading-relaxed text-justify">
-                  Our products serve various sectors, including food factories,
-                  healthcare facilities, hotels, restaurants, health clubs, and
-                  public establishments. We offer both standard and customized
-                  solutions that meet the unique needs of each client, all while
-                  maintaining the highest standards of quality and precision in
-                  manufacturing.
-                </p>
-                <p className="leading-relaxed text-justify">
-                  We take pride in keeping pace with global industrial
-                  developments while preserving our local identity, producing
-                  100% Egyptian-made products that meet the needs of the
-                  domestic market and compete internationally. This is supported
-                  by a specialized technical team that provides continuous
-                  assistance.
-                </p>
+                <PortableText
+                  value={aboutUs?.content}
+                  components={portableTextComponents}
+                />
               </TimelineContent>
               {/* <TimelineContent
                 as="div"
@@ -293,7 +324,7 @@ const AboutUs = () => {
                 animationNum={12}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="flex items-center gap-2 text-teal-700 dark:text-teal-700 text-2xl font-bold mb-2"
+                className="flex items-center gap-2 text-emerald-700 dark:text-emerald-700 text-2xl font-bold mb-2"
               ></TimelineContent>
               <TimelineContent
                 as="div"
@@ -319,7 +350,7 @@ const AboutUs = () => {
                 animationNum={15}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="bg-teal-700 hover:bg-teal-600 shadow-2xl shadow-teal-800 hover:shadow-teal-500 flex w-fit ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
+                className="bg-emerald-700 hover:bg-emerald-600 shadow-2xl shadow-emerald-800 hover:shadow-emerald-500 flex w-fit ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
               >
                 Contact Us
                 <GoArrowUpRight className="rtl:rotate-270" />
@@ -328,16 +359,6 @@ const AboutUs = () => {
           </div> */}
         </div>
       </div>
-
-      {/* Copper Forge Background with Top Glow */}
-      <div
-        className="absolute inset-0 z-0 rotate-180"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(96, 108, 56, 0.25), transparent 70%)",
-        }}
-      />
-      {/* Your Content/Components */}
     </section>
   );
 };

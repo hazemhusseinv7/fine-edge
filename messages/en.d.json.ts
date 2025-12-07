@@ -16,6 +16,19 @@ declare const messages: {
     },
 
     "copyright": "All rights reserved."
+  },
+
+  "Blog": {
+    "title": "Blog",
+    "read-more": "Read more",
+    "not-found": "No articles are currently available",
+
+    "post": {
+      "return": "Return to the blog",
+      "not-found": "The article does not exist."
+    },
+
+    "close": "Close"
   }
 };
 export default messages;
