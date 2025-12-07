@@ -37,6 +37,79 @@ export async function getSettingsData(): Promise<SettingsType | null> {
   }
 }
 
+export async function getHeroData(
+  lang: string = "en"
+): Promise<HeroType | null> {
+  const query = `*[_type == "main"][0]{
+    "title": title[_key == $lang][0].value,
+    image {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      }
+    },
+    certificateBadge {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      }
+    }
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { lang },
+      {
+        next: { revalidate: REVALIDATE_TIME, tags: ["main"] },
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching hero data:", error);
+    return null;
+  }
+}
+
+export async function getRiskAdvantageData(
+  lang: string = "en"
+): Promise<RiskAdvantageType | null> {
+  const query = `*[_type == "riskAdvantage"][0]{
+    "title": title[_key == $lang][0].value,
+    "cards": cards[] {
+      "title": title[_key == $lang][0].value,
+      "description": description[].item[_key == $lang][0].value,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      }
+    }
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { lang },
+      {
+        next: { revalidate: REVALIDATE_TIME, tags: ["riskAdvantage"] },
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching risk advantage data:", error);
+    return null;
+  }
+}
+
 export async function getAboutUsData(
   lang: string = "en"
 ): Promise<AboutUsType | null> {

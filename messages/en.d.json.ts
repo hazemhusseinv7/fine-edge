@@ -7,6 +7,15 @@ declare const messages: {
     "description": "Fine Edge"
   },
 
+  "Header": {
+    "links": {
+      "link-1": "Services",
+      "link-2": "About us",
+      "link-3": "Blog"
+    },
+    "button": "Contact us"
+  },
+
   "Footer": {
     "links": {
       "link-1": "Services",
@@ -18,6 +27,29 @@ declare const messages: {
     "copyright": "All rights reserved."
   },
 
+  "Contact": {
+    "title": "Contact Us",
+
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "button": "Send"
+    },
+
+    "messages": {
+      "success": {
+        "title": "Message Sent Successfully",
+        "description": "Thank you for contacting us. We will get back to you as soon as possible."
+      },
+      "error": {
+        "title": "Sending Failed",
+        "description": "An error occurred while sending the message. Please try again."
+      }
+    }
+  },
+  
   "Blog": {
     "title": "Blog",
     "read-more": "Read more",

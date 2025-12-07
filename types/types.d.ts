@@ -21,6 +21,21 @@ interface SettingsType {
   youtube?: string;
 }
 
+interface HeroType {
+  title: string;
+  image: ImageType;
+  certificateBadge?: ImageType;
+}
+
+interface RiskAdvantageType {
+  title: string;
+  cards: {
+    title: string;
+    description: string[];
+    image: ImageType;
+  }[];
+}
+
 interface AboutUsType {
   title: string;
   heroImage: {

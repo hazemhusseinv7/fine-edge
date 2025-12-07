@@ -5,13 +5,14 @@ import { JSX, useRef } from "react";
 import Image from "next/image";
 
 export default function index({
+  title,
   list,
 }: {
-  list: {
+  title?: string;
+  list?: {
     title: string;
     description: string[];
     image: string;
-    color: string;
   }[];
 }): JSX.Element {
   const container = useRef(null);
@@ -25,14 +26,16 @@ export default function index({
         <div className="text-white h-[40vh]  w-full grid place-content-center ">
           <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-size-[54px_54px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-          <h2 className="2xl:text-7xl text-teal-950 text-5xl px-8 font-semibold text-center tracking-tight leading-[120%]">
-            Risk Advantage Comparison
-          </h2>
+          {title && (
+            <h2 className="2xl:text-7xl text-teal-950 text-5xl px-8 font-semibold text-center tracking-tight leading-[120%]">
+              {title}
+            </h2>
+          )}
         </div>
       </>
 
       <div className="text-white w-full">
-        {list.map(({ title, description, image, color }, i) => {
+        {list?.map(({ title, description, image }, i) => {
           const targetScale = 1 - (list.length - i) * 0.05;
           return (
             <Card
@@ -40,7 +43,6 @@ export default function index({
               i={i}
               image={image}
               title={title}
-              color={color}
               description={description}
               progress={scrollYProgress}
               range={[i * 0.25, 1]}
@@ -57,7 +59,6 @@ interface CardProps {
   title: string;
   description: string[];
   image: string;
-  color: string;
   progress: MotionValue<number>;
   range: [number, number];
   targetScale: number;
@@ -67,7 +68,6 @@ export const Card: React.FC<CardProps> = ({
   title,
   description,
   image,
-  color,
   progress,
   range,
   targetScale,

@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
+
 import {
   Navbar,
   NavbarBrand,
@@ -15,12 +17,14 @@ import {
 import ChangeLang from "./ChangeLang";
 
 const Header = () => {
+  const t = useTranslations("Header");
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const items = [
-    { name: "Products", link: "#" },
-    { name: "About Us", link: "#" },
-    { name: "Blog", link: "/blog" },
+    { name: t("links.link-1"), link: "/services" },
+    { name: t("links.link-2"), link: "/about-us" },
+    { name: t("links.link-3"), link: "/blog" },
   ];
 
   return (
@@ -56,10 +60,10 @@ const Header = () => {
             <Button
               as={Link}
               className="text-white text-md font-medium bg-linear-to-tr from-teal-400 to-teal-700"
-              href="#"
+              href="/contact"
               variant="shadow"
             >
-              Contact Us
+              {t("button")}
             </Button>
           </NavbarItem>
           <NavbarItem>
