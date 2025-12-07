@@ -88,11 +88,10 @@ export const Card: React.FC<CardProps> = ({
     >
       <motion.div
         style={{
-          backgroundColor: color,
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`flex flex-col relative -top-[25%] h-[450px] w-[90%] lg:w-[70%] rounded-md lg:p-10 p-4 origin-top`}
+        className={`flex flex-col relative -top-[25%] h-[450px] w-[90%] lg:w-[70%] rounded-md lg:p-10 p-4 origin-top bg-linear-to-tr from-teal-700 to-teal-900`}
       >
         <h2 className="text-2xl text-center font-semibold max-lg:mt-2">
           {title}

@@ -1,15 +1,6 @@
-import ReactLenis from "lenis/react";
+import { redirect } from "next/navigation";
 
-import Hero from "@/components/Hero";
-import AboutUs from "@/components/AboutUs";
-import RiskAdvantageCards from "@/components/RiskAdvantageCards";
-
-export default function Home() {
-  return (
-    <ReactLenis root className="min-h-[200vh] overflow-hidden">
-      <Hero />
-      <RiskAdvantageCards />
-      <AboutUs />
-    </ReactLenis>
-  );
+// This page only renders when the app is built statically (output: 'export')
+export default function RootPage() {
+  redirect("/en");
 }

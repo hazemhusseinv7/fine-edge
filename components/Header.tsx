@@ -12,6 +12,7 @@ import {
   Link,
   Button,
 } from "@heroui/react";
+import ChangeLang from "./ChangeLang";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -29,7 +30,7 @@ const Header = () => {
         isBordered
         className="fixed top-0"
       >
-        <NavbarContent   as="div">
+        <NavbarContent as="div">
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="sm:hidden"
@@ -60,6 +61,9 @@ const Header = () => {
             >
               Contact Us
             </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <ChangeLang />
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>

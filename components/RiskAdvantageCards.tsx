@@ -8,7 +8,7 @@ const RiskAdvantageCards = () => {
         "Heavy financial fines from the National Food Safety Authority for non-compliance with health regulations.",
       ],
       image: "/risk-advantage-cards/card-1.jpg",
-      color: "#5196fd",
+      color: "#022f2e",
     },
     {
       title: "Food contamination cases",
@@ -16,7 +16,7 @@ const RiskAdvantageCards = () => {
         "WHO reports indicate 70% of food contamination cases originate from unsafe sewage networks.",
       ],
       image: "/risk-advantage-cards/card-2.jpg",
-      color: "#8f89ff",
+      color: "#022f2e",
     },
     {
       title: "Facility closure and license revocation",
@@ -24,7 +24,7 @@ const RiskAdvantageCards = () => {
         "Facility closure and license revocation due to non-compliance with occupational safety and health standards.",
       ],
       image: "/risk-advantage-cards/card-3.jpg",
-      color: "#13006c",
+      color: "#022f2e",
     },
     {
       title: "Small Details Make Big Differences",
@@ -34,7 +34,7 @@ const RiskAdvantageCards = () => {
         "Durability and Sustainability - Rust and corrosion resistant with solid physical structure that withstands impacts.",
       ],
       image: "/risk-advantage-cards/card-4.jpg",
-      color: "#0b4f4a",
+      color: "#022f2e",
     },
     {
       title: "Sustainability and Development",
@@ -44,7 +44,7 @@ const RiskAdvantageCards = () => {
         "Focus on building rather than repairing.",
       ],
       image: "/risk-advantage-cards/card-5.jpg",
-      color: "#0b4f4a",
+      color: "#022f2e",
     },
   ];
 
